@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "github.com/example/path/gen;gen";
+
+package api;
+
+service Operation {
+  rpc Operation(OpRequest) returns (OpResponse) {}
+}
+
+message OpRequest {
+   string input = 1;
+}
+
+message OpResponse {
+  int64 result = 1;
+}
