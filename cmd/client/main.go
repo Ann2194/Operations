@@ -19,9 +19,6 @@ func main() {
 	for {
 		fmt.Print("Введите числовой пример: ")
 		fmt.Fscan(os.Stdin, &input)
-		if input == "" {
-			log.Println("пустой ввод")
-		}
 		c := api.NewOperationClient(conn)
 		res, err := c.Operation(context.Background(), &api.OpRequest{Input: input})
 		if err != nil {

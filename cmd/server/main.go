@@ -15,7 +15,7 @@ func main() {
 
 	l, err := net.Listen("tcp", ":8000")
 	if err != nil {
-		panic(fmt.Errorf("listen error: %w", err))
+		panic(fmt.Errorf("failed to listen: %w", err))
 	}
 	if err := s.Serve(l); err != nil {
 		panic(fmt.Errorf("failed response: %w", err))

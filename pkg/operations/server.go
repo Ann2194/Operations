@@ -13,11 +13,11 @@ type GRPCServer struct {
 }
 
 func (s *GRPCServer) Operation(ctx context.Context, req *api.OpRequest) (*api.OpResponse, error) {
-	r := regexp.MustCompile(`(-?\d+(?:\.\d+)?)\s*([-+*:\/])\s*(-?\d+(?:\.\d+)?)`)
+	r := regexp.MustCompile(`(-?\d+(?:\,\d+)?)\s*([-+*:\/])\s*(-?\d+(?:\,\d+)?)`)
 	group := r.FindStringSubmatch(req.GetInput())
 
 	if len(group) < 3 {
-		return &api.OpResponse{}, errors.New("регулярка не отработала")
+		return &api.OpResponse{}, errors.New("некорректный ввод")
 	}
 	var a, b int64
 	var err error
@@ -40,7 +40,7 @@ func (s *GRPCServer) Operation(ctx context.Context, req *api.OpRequest) (*api.Op
 	case "/":
 		res = Split(a, b)
 	default:
-		err = errors.New("неясный оператор")
+		err = errors.New("оператор не определен")
 	}
 	if err != nil {
 		return &api.OpResponse{}, err
